@@ -108,6 +108,24 @@ LIMIT 1;
 
 ---
 
+Вариант решения без использования таблицы rental 
+
+```
+
+SELECT 
+    DATE_FORMAT(p.payment_date, '%Y') AS payment_year,
+    DATE_FORMAT(p.payment_date, '%m') AS payment_month,
+    SUM(p.amount) AS total_payment_amount,
+    COUNT(DISTINCT p.rental_id) AS rental_count
+FROM payment p
+GROUP BY 
+    DATE_FORMAT(p.payment_date, '%Y'), 
+    DATE_FORMAT(p.payment_date, '%m')
+ORDER BY total_payment_amount DESC
+LIMIT 1;
+
+```
+
 ## Дополнительные задания (со звёздочкой*)
 Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.
 
